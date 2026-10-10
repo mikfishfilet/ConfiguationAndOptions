@@ -1,98 +1,100 @@
-
 # MicroBlog
 
 ## Project Description
 
-MicroBlog is an ASP.NET Core Razor Pages application that allows users to create and view blog posts.
-
-The application uses a JSON file to store posts so that data persists when the application is restarted.
+MicroBlog is an ASP.NET Core Razor Pages web application that allows users to create and view blog posts. This project demonstrates how to use application configuration and the Options pattern to control website settings.
 
 ## Features
 
-- View all blog posts on the home page.
-- Create new blog posts with a title and body.
-- View individual posts on a Details page.
-- Automatically assign a unique ID to each post.
-- Automatically record the UTC creation date and time.
-- Validate required fields using data annotations.
-- Save and load posts using JSON serialization.
-- Reusable partial view for displaying post summaries.
-- Shared layout with navigation bar.
+* Display a list of blog posts.
+* Create new blog posts.
+* View individual post details.
+* Configure the website name through `appsettings.json`.
+* Enable or disable the comment form using configuration settings.
+* Use dependency injection and the Options pattern to access application settings.
 
 ## Technologies Used
 
-- C#
-- ASP.NET Core Razor Pages
-- .NET 10
-- HTML
-- CSS
-- Bootstrap
-- JSON
+* C#
+* ASP.NET Core Razor Pages
+* .NET 10
+* HTML and CSS
+* JSON configuration files
+* Visual Studio
+
+## Configuration
+
+The application uses `appsettings.json` to define the default website settings.
+
+Example:
+
+```json
+"SiteOptions": {
+  "SiteName": "My Micro Blog",
+  "EnableComments": false
+}
+```
+
+The `SiteOptions` class contains two properties:
+
+* `SiteName`: Sets the name displayed on the website.
+* `EnableComments`: Determines whether the comment form is displayed on the Details page.
+
+The application registers these settings using the ASP.NET Core Options pattern and dependency injection.
+
+### Development Settings
+
+The `appsettings.Development.json` file can override the default comment setting during development.
+
+Example:
+
+```json
+{
+  "SiteOptions": {
+    "EnableComments": true
+  }
+}
+```
+
+When the application runs in the Development environment, the comment form is displayed because `EnableComments` is set to `true`. When the setting is `false`, the form is hidden.
+
+## How to Run the Application
+
+1. Clone or download the repository.
+2. Open `MicroBlog.csproj` in Visual Studio.
+3. Restore the NuGet packages if prompted.
+4. Make sure the configuration files contain valid JSON.
+5. Build the project.
+6. Run the application using Visual Studio.
+7. Create a blog post and open its Details page to test the comment form.
 
 ## Project Structure
 
-```text
-MicroBlog/
-├── Models/
-│   └── Post.cs
-├── Services/
-│   └── PostService.cs
-├── Pages/
-│   ├── Index.cshtml
-│   ├── Index.cshtml.cs
-│   ├── Create.cshtml
-│   ├── Create.cshtml.cs
-│   ├── Details.cshtml
-│   ├── Details.cshtml.cs
-│   ├── Shared/
-│   │   ├── _Layout.cshtml
-│   │   └── _PostCard.cshtml
-│   └── _ViewImports.cshtml
-├── data/
-│   └── posts.json
-├── wwwroot/
-├── Program.cs
-└── README.md
-```
+* `Pages/Index.cshtml` — Displays all blog posts.
+* `Pages/Create.cshtml` — Provides the form for creating a post.
+* `Pages/Details.cshtml` — Displays an individual post and conditionally displays the comment form.
+* `Models/` — Contains the application's model classes, including `SiteOptions`.
+* `appsettings.json` — Contains default application settings.
+* `appsettings.Development.json` — Contains development-specific configuration overrides.
+* `Program.cs` — Configures services, dependency injection, and the application pipeline.
 
-## Pages
+## What I Learned
 
-| Page | Description |
-|---|---|
-| Index | Displays all blog posts. |
-| Create | Provides a form to create a new post. |
-| Details | Displays the full content of a selected post. |
+Through this project, I practiced working with ASP.NET Core configuration files, creating a strongly typed options class, registering services with dependency injection, and using configuration settings to control what appears on a Razor Page.
 
-## Data Storage
+I also gained experience organizing a web application and documenting its features and setup instructions.
 
-Blog posts are stored in `data/posts.json`.
+## Screenshots
+<img width="624" height="125" alt="image" src="https://github.com/user-attachments/assets/44343272-d39d-4144-abb3-acac84743e66" />
+<img width="627" height="242" alt="image" src="https://github.com/user-attachments/assets/acbc4363-e495-40b0-97dd-bf648a738698" />
+<img width="627" height="260" alt="image" src="https://github.com/user-attachments/assets/6732e19c-edca-4879-9a8c-673b54a94aa0" />
+<img width="1386" height="491" alt="image" src="https://github.com/user-attachments/assets/c009c91b-7dfb-4b04-af76-7884abbf5b70" />
 
-Each post contains:
 
-- Id: Unique identifier for the post.
-- Title: Title of the blog post.
-- Body: Content of the blog post.
-- CreatedUtc: Date and time the post was created in UTC.
 
-The application loads existing posts when the service starts and saves new posts to the JSON file.
-
-## How to Run
-
-1. Clone or download the repository.
-2. Open the MicroBlog solution in Visual Studio.
-3. Restore NuGet packages if needed.
-4. Build the solution.
-5. Run the application using Ctrl + F5.
-
-The application will automatically create the data folder and JSON file if they do not exist.
-
-## Author
-
-Mikaela Fischer
-
-## Photos 
-<img width="294" height="302" alt="image" src="https://github.com/user-attachments/assets/d8534462-42e2-43a0-a26d-409c6963f2f0" />
-<img width="273" height="378" alt="image" src="https://github.com/user-attachments/assets/686ec983-c360-4194-93e7-7e0ab972da5d" />
-<img width="680" height="195" alt="image" src="https://github.com/user-attachments/assets/adaa205c-e832-4a12-8641-6854861addfa" />
+* Blog posts page
+* Create post page
+* Details page with comments enabled
+* Details page with comments disabled
 
 
