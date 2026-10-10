@@ -1,10 +1,14 @@
 
 using MicroBlog.Services;
 using MicroBlog.Repositories;
+using MicroBlog.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
+
+builder.Services.Configure<SiteOptions>(
+    builder.Configuration.GetSection("SiteOptions"));
 
 builder.Services.AddSingleton<PostService>();
 builder.Services.AddSingleton<IBlogRepository, JsonBlogRepository>();
